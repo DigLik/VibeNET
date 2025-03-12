@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -35,12 +35,11 @@ jobs:
 
       - name: Build for ${{ matrix.os }}
         run: |
-          dotnet publish --configuration Release --output ./publish --runtime ${{ matrix.platform }} --self-contained true
+          dotnet publish --configuration Release --output ./publish --runtime ${{ matrix.platform }} --self-contained true /p:PublishSingleFile=true
 
       - name: Create release asset
         run: |
-          zip -r ./release-${{ matrix.platform }}.zip ./publish
-        if: matrix.os == 'ubuntu-latest'
+          zip -j ./release-${{ matrix.platform }}.zip ./publish/*
 
       - name: Upload release to GitHub
         uses: softprops/action-gh-release@v2
@@ -48,4 +47,3 @@ jobs:
           files: ./release-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
