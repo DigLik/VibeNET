@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace VibeNET.ViewModels
+namespace VibeNET.ViewModels;
+public class ViewModelBase : ObservableObject
 {
-    public class ViewModelBase : ObservableObject
-    {
-    }
 }
