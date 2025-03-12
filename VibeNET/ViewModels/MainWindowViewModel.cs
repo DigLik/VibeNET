@@ -22,20 +22,16 @@ namespace VibeNET.ViewModels
         {
             var folderPickerOptions = new FolderPickerOpenOptions
             {
-                Title = "Выберите папку",
-                AllowMultiple = false
+                Title = "Выберите папку"
             };
 
-            // Открываем диалог выбора папки через StorageProvider окна
             var selectedFolders = await new Window().StorageProvider.OpenFolderPickerAsync(folderPickerOptions);
 
             if (selectedFolders != null && selectedFolders.Any())
             {
-                // Получаем путь к первой выбранной папке
                 var folderPath = selectedFolders[0].Path.LocalPath;
                 FolderPath = folderPath;
 
-                // Получаем список файлов и папок в выбранной папке
                 var folderItems = Directory.GetFileSystemEntries(folderPath);
                 FolderItems = [.. folderItems.Select(item => Path.GetFileName(item))];
             }
