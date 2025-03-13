@@ -14,29 +14,24 @@
     </Design.DataContext>
 
 	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="Auto"/>
-		</Grid.ColumnDefinitions>
-		
-		<Grid
-			Grid.Column="1" MinWidth="200"
-			HorizontalAlignment="Right"
-			VerticalAlignment="Stretch">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<ListBox
-				Grid.Row="0"
-				ItemsSource="{Binding FolderItems}"/>
+		<TextBox
+			Text="{Binding AudioFilePath, Mode=TwoWay}"/>
+
+		<StackPanel
+			Orientation="Horizontal">
 			<Button
-				Grid.Row="1"
-				Content="Выбрать Папку"
-				Command="{Binding PickFolderCommand}"
-				HorizontalAlignment="Stretch"
-				HorizontalContentAlignment="Center"/>
-		</Grid>
+				Content="Play"
+				Command="{Binding PlayCommand}"/>
+			<Button
+				Content="Stop"
+				Command="{Binding StopCommand}"/>
+			<Button
+				Content="Pause"
+				Command="{Binding PauseCommand}"/>
+			<Button
+				Content="Resume"
+				Command="{Binding ResumeCommand}"/>
+		</StackPanel>
 	</Grid>
 
 </Window>
